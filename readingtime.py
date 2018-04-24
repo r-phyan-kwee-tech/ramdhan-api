@@ -1,9 +1,8 @@
 import math
 
 from enum import Enum
-
-from pyquery import PyQuery as pq
 from pip._vendor import requests
+from pyquery import PyQuery as pq
 
 
 class Lang(Enum):

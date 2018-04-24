@@ -1,9 +1,5 @@
 import unittest
 
-from pip._vendor import requests
-
-from readingtime import ReadingTime
-
 
 class MockResponse(object):
 
@@ -12,13 +8,8 @@ class MockResponse(object):
 
 
 class TestScrapper(unittest.TestCase):
-
-    def test_page(self):
-        # print(generate_meta(10, 1, [None] * 100))
-        # print(generate_meta(10, 10, [None] * 100))
-        for issue_number in range(120, 305):
-            print(issue_number)
-        print("done")
-
-
-
+    def test_mm_num_gen(self):
+        from seeds import get_mm_num
+        assert get_mm_num(10) == '၁၀'
+        assert get_mm_num(100) == '၁၀၀'
+        assert get_mm_num(1234567890) == '၁၂၃၄၅၆၇၈၉၀'

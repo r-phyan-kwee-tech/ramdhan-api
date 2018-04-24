@@ -1,10 +1,11 @@
 import calendar
 import datetime
-import os
-from os.path import join, dirname
+from time import strftime, gmtime
 
+import os
 from dotenv import load_dotenv
-from sqlalchemy import Column, Integer, Text, String, ForeignKey, BIGINT, VARCHAR
+from os.path import join, dirname
+from sqlalchemy import Column, Integer, Text, String, ForeignKey, BIGINT, VARCHAR, Boolean
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship
@@ -18,8 +19,6 @@ load_dotenv(dotenv_path, verbose=True)
 url = os.environ["DB_URL_FORMAT"]
 url = url.format(os.environ["DB_USER_NAME"], os.environ["DB_PASSWORD"], os.environ["DB_HOST"], os.environ["DB_PORT"],
                  os.environ["DB_NAME"])
-
-
 
 # Replace 'sqlite:///rfg.db' with your path to database
 if os.environ["ENV"] == 'dev':
@@ -85,10 +84,7 @@ class Country(Base):
     __tablename__ = 'country'
     id = Column(String(50), primary_key=True, index=True)
     object_id = Column(String(50), unique=True, index=True)
-    tag = Column(String(20))
-    img = Column(String(255))
     name = Column(VARCHAR(100), unique=True)
-    base_url = Column(String(100), unique=True)
     state = relationship("State", uselist=True)
     # article = relationship("Article", back_populates="source")
 
@@ -100,9 +96,12 @@ class State(Base):
     __tablename__ = 'state'
     id = Column(String(50), primary_key=True, index=True)
     object_id = Column(String(50), unique=True, index=True)
-    url = Column(String(255))
-    issue_number = Column(String(20))
-    source_id = Column(String(255), ForeignKey("country.object_id"))
+
+    name_mm_uni=Column(String(50))
+    name_mm_zawgyi = Column(String(50))
+
+
+    country_id = Column(String(255), ForeignKey("country.object_id"))
 
     day = relationship("Day", uselist=True)
     created_date = Column(BIGINT(), default=calendar.timegm(datetime.datetime.utcnow().utctimetuple()))
@@ -113,14 +112,19 @@ class Day(Base):
     __tablename__ = 'day'
     id = Column(String(50), primary_key=True, index=True)
     object_id = Column(String(50), unique=True, index=True)
-    url = Column(String(255))
-    img = Column(String(255))
-    main_url = Column(String(255))
-    title = Column(String(255), index=True)
-    pre_content = Column(String(500))
-    article_view_content = Column(Text(999999, convert_unicode=False))
+    day = Column(Integer())
+    day_mm = Column(String(10))
+
+    calendar_day = Column(String(30), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
+    hijari_day = Column(String(30), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
+
+    sehri_time = Column(String(30), default=str("4:30 am"))
+    iftari_time = Column(String(30), default=str("7:30 pm"))
+
+    is_kadir = Column(Boolean, default=False)
+
     country_id = Column(String(255), ForeignKey("country.object_id"))
     state_id = Column(String(255), ForeignKey("state.object_id"))
     created_date = Column(BIGINT(), default=calendar.timegm(datetime.datetime.utcnow().utctimetuple()))
     # updated_date = Column(String(50), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
-    updated_date = Column(BIGINT(), default=calendar.timegm(datetime.datetime.utcnow().utctimetuple())-86500)
+    updated_date = Column(BIGINT(), default=calendar.timegm(datetime.datetime.utcnow().utctimetuple()))
