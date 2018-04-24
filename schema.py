@@ -1,7 +1,7 @@
 import graphene
 from graphene import relay
 from graphene_sqlalchemy import SQLAlchemyObjectType
-from sqlalchemy import or_, desc
+from sqlalchemy import or_, desc, asc
 
 from database import db_session, User as UserModel, Country as CountryModel, State as StateModel, \
     Day as DayModel, gen_offset_from_page, generate_meta
@@ -120,7 +120,8 @@ class Query(graphene.ObjectType):
         return country
 
     # issues = SQLAlchemyConnectionField(State)
-    states = graphene.Field(lambda: StateResult, limit=graphene.Int(), page=graphene.Int(), country_id=graphene.String())
+    states = graphene.Field(lambda: StateResult, limit=graphene.Int(), page=graphene.Int(),
+                            country_id=graphene.String())
     state = graphene.Field(lambda: State, state_id=graphene.String()
                            )
 
@@ -152,7 +153,8 @@ class Query(graphene.ObjectType):
         page = args.get("page")
         issue_id = args.get("state_id")
         all_issue = Day.get_query(context).filter(DayModel.state_id == issue_id).all()
-        result = Day.get_query(context).filter(DayModel.state_id == issue_id).limit(limit).offset(
+        result = Day.get_query(context).filter(DayModel.state_id == issue_id).order_by(asc(DayModel.day)).limit(
+            limit).offset(
             gen_offset_from_page(page, limit))
         meta_obj = generate_meta(limit, page, all_issue)
         return DayResult(data=result,

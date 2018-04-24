@@ -40,7 +40,7 @@ def gen_seeds():
         print("Generating Country.......\n\n\n")
         country_id = str(uuid.uuid4().hex)
 
-        country = Country(id=country_id, object_id=country_id,name=str(s["name"]))
+        country = Country(id=country_id, object_id=country_id, name=str(s["name"]))
         db_session.add(country)
         db_session.commit()
         for state in state_arr:
@@ -57,7 +57,7 @@ def gen_seeds():
                 article = Day(id=article_id, object_id=article_id,
                               country_id=str(country.object_id),
                               state_id=str(issue.object_id),
-                              day=art, day_mm=get_mm_num(art), sehri_time="4:3" + str(art) + " am",
+                              day=art, day_mm=str(get_mm_num(art)), sehri_time="4:3" + str(art) + " am",
                               iftari_time="7:3" + str(art) + " pm"
                               )
                 db_session.add(article)

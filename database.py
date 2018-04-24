@@ -21,7 +21,7 @@ url = url.format(os.environ["DB_USER_NAME"], os.environ["DB_PASSWORD"], os.envir
                  os.environ["DB_NAME"])
 
 # Replace 'sqlite:///rfg.db' with your path to database
-if os.environ["ENV"] == 'dev':
+if os.environ["ENV"] != 'production':
     engine = create_engine('sqlite:///ramdan.db', convert_unicode=True)
 else:
     engine = create_engine(url)
@@ -96,10 +96,12 @@ class State(Base):
     __tablename__ = 'state'
     id = Column(String(50), primary_key=True, index=True)
     object_id = Column(String(50), unique=True, index=True)
-
-    name_mm_uni=Column(String(50))
-    name_mm_zawgyi = Column(String(50))
-
+    if os.environ["ENV"] == 'production':
+        name_mm_uni = Column(String(50, collation='utf8mb4_myanmar_ci', convert_unicode=True))
+        name_mm_zawgyi = Column(String(50, collation='utf8mb4_myanmar_ci', convert_unicode=True))
+    else:
+        name_mm_uni = Column(String(50))
+        name_mm_zawgyi = Column(String(50))
 
     country_id = Column(String(255), ForeignKey("country.object_id"))
 
@@ -113,7 +115,10 @@ class Day(Base):
     id = Column(String(50), primary_key=True, index=True)
     object_id = Column(String(50), unique=True, index=True)
     day = Column(Integer())
-    day_mm = Column(String(10))
+    if os.environ["ENV"] == 'production':
+        day_mm = Column(String(10, collation="utf8mb4_myanmar_ci", convert_unicode=True))
+    else:
+        day_mm = Column(String(10))
 
     calendar_day = Column(String(30), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
     hijari_day = Column(String(30), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))

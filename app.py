@@ -57,6 +57,5 @@ if __name__ == "__main__":
     exists = engine.dialect.has_table(engine.connect(), "country")
     if exists is False:
         model_base.metadata.create_all(engine)
-
         gen_seeds()
-    app.run(host="0.0.0.0")
+    app.run(host="0.0.0.0", port=int(os.environ["PORT"]))
