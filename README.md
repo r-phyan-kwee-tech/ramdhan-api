@@ -24,7 +24,7 @@ Go to the root dir and run the below line in the terminal.
 ```  
 python app.py  
 ```  
-Browse to http://localhost/api
+Browse to http://localhost:5000/api
 
 ## Development Orchestration
 Make sure you have to install docker in your machine.
