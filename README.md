@@ -140,6 +140,12 @@ After Spinning up your docker and you will be able to see the Graphiql query edi
         hijariDay
         sehriTime
         iftariTime
+	sehriTimeDesc
+        iftariTimeDesc
+        sehriTimeDescMmUni
+        sehriTimeDescMmZawgyi
+	iftariTimeDescMmZawgyi
+        iftariTimeDescMmUni
         isKadir
         countryId
         stateId
