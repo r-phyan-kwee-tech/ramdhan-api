@@ -1,5 +1,4 @@
 
-
 # ramdan-api  
 A collection of the ramdan timetables of the different states from Myanmar.
   
@@ -140,12 +139,12 @@ After Spinning up your docker and you will be able to see the Graphiql query edi
         hijariDay
         sehriTime
         iftariTime
-	sehriTimeDesc
+		sehriTimeDesc
         iftariTimeDesc
-	sehriTimeDescMmUni
-	sehriTimeDescMmZawgyi
-	iftariTimeDescMmZawgyi
-	iftariTimeDescMmUni
+		sehriTimeDescMmUni
+		sehriTimeDescMmZawgyi
+		iftariTimeDescMmZawgyi
+		iftariTimeDescMmUni
         isKadir
         countryId
         stateId
@@ -153,4 +152,3 @@ After Spinning up your docker and you will be able to see the Graphiql query edi
         updatedDate
       }
     }
-
