@@ -142,10 +142,10 @@ After Spinning up your docker and you will be able to see the Graphiql query edi
         iftariTime
 	sehriTimeDesc
         iftariTimeDesc
-        sehriTimeDescMmUni
-        sehriTimeDescMmZawgyi
+	sehriTimeDescMmUni
+	sehriTimeDescMmZawgyi
 	iftariTimeDescMmZawgyi
-        iftariTimeDescMmUni
+	iftariTimeDescMmUni
         isKadir
         countryId
         stateId
