@@ -123,6 +123,13 @@ class Day(Base):
     calendar_day = Column(String(30), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
     hijari_day = Column(String(30), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
 
+    sehri_time_desc = Column(String(30))
+    iftari_time_desc = Column(String(30))
+    sehri_time_desc_mm_uni = Column(String(30,collation="utf8mb4_myanmar_ci",convert_unicode=True))
+    sehri_time_desc_mm_zawgyi = Column(String(30,collation="utf8mb4_myanmar_ci",convert_unicode=True))
+    iftari_time_desc_mm_zawgyi = Column(String(30,collation="utf8mb4_myanmar_ci",convert_unicode=True))
+    iftari_time_desc_mm_uni = Column(String(30,collation="utf8mb4_myanmar_ci",convert_unicode=True))
+
     sehri_time = Column(String(30), default=str("4:30 am"))
     iftari_time = Column(String(30), default=str("7:30 pm"))
 

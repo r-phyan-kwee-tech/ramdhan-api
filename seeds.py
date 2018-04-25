@@ -58,7 +58,13 @@ def gen_seeds():
                               country_id=str(country.object_id),
                               state_id=str(issue.object_id),
                               day=art, day_mm=str(get_mm_num(art)), sehri_time="4:3" + str(art) + " am",
-                              iftari_time="7:3" + str(art) + " pm"
+                              sehri_time_desc="Sehri",
+                              sehri_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါချည်ချိန်"),
+                              sehri_time_desc_mm_uni="ဝါချည်ချိန်",
+                              iftari_time="7:3" + str(art) + " pm",
+                              iftari_time_desc="Iftari",
+                              iftari_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါဖြေချိန်"),
+                              iftari_time_desc_mm_uni="ဝါဖြေချိန်"
                               )
                 db_session.add(article)
                 db_session.commit()
