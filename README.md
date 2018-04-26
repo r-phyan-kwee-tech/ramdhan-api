@@ -146,9 +146,14 @@ After Spinning up your docker and you will be able to see the Graphiql query edi
         iftariTimeDescMmZawgyi
         iftariTimeDescMmUni
         isKadir
+        duaAr
+        duaEn
+        duaMmUni
+        duaMmZawgyi
         countryId
         stateId
         createdDate
         updatedDate
       }
     }
+
