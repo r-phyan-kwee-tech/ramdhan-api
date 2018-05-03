@@ -1,3 +1,5 @@
+import os
+
 from rabbit import Rabbit
 
 
@@ -15,6 +17,25 @@ def mm_num(x):
         9: '၉'
 
     }[x]
+
+
+def get_state_name(x):
+    return {'YANGON Region': "ရန်ကုန်တိုင်း",
+            'NAY PYI DAW Region': "နေပြည်တော် (ပျဉ်းမနား)",
+            'MANDALAY Region': "မန္တလေးတိုင်း",
+            'KAYIN Region': "ကရင်ပြည်နယ်",
+            'MON Region': "မွန်ပြည်နယ်",
+            'KAYAR Region': "ကယားပြည်နယ်",
+            'KACHIN Region': "ကချင်ပြည်နယ်",
+            'SHAN Region': "ရှမ်းပြည်နယ်",
+            'RAKHINE Region': "ရခိုင်ပြည်နယ်",
+            'TANIN THARYE Region': "တင်္နသာရီတိုင်း",
+            'MA GWAY Region': "မကွေးတိုင်း",
+            'SAGAING Region': "စစ်ကိုင်းတိုင်း",
+            'IRRWADY Region': "ဧရာဝတီတိုင်း",
+            'BAGO Region': "ပဲခူးတိုင်း"
+
+            }[x]
 
 
 def daily_dua(x):
@@ -183,32 +204,34 @@ def gen_seeds():
         country = Country(id=country_id, object_id=country_id, name=str(s["name"]))
         db_session.add(country)
         db_session.commit()
-        for state in state_arr:
-            print("Generating State........\n\n")
-            issue_id = str(uuid.uuid4().hex)
-            issue = State(id=issue_id, object_id=issue_id, country_id=str(country.object_id), name_mm_uni=str(state),
-                          name_mm_zawgyi=Rabbit.uni2zg(state))
-            db_session.add(issue)
-            db_session.commit()
-
-            for art in range(1, 31):
-                print("Generating Days.......\n")
-                article_id = str(uuid.uuid4().hex)
-                article = Day(id=article_id, object_id=article_id,
-                              country_id=str(country.object_id),
-                              state_id=str(issue.object_id),
-                              day=art, day_mm=str(get_mm_num(art)), sehri_time="4:3" + str(art) + " am",
-                              sehri_time_desc="Sehri",
-                              sehri_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါချည်ချိန်"),
-                              sehri_time_desc_mm_uni="ဝါချည်ချိန်",
-                              iftari_time="7:3" + str(art) + " pm",
-                              dua_mm_uni=daily_dua(art)["dua_mm"],
-                              dua_mm_zawgyi=Rabbit.uni2zg(daily_dua(art)["dua_mm"]),
-                              dua_ar=daily_dua(art)["dua_ar"],
-                              dua_en=daily_dua(art)["dua_en"],
-                              iftari_time_desc="Iftari",
-                              iftari_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါဖြေချိန်"),
-                              iftari_time_desc_mm_uni="ဝါဖြေချိန်"
-                              )
-                db_session.add(article)
+        if os.environ["ENV"] != 'production':
+            for state in state_arr:
+                print("Generating State........\n\n")
+                issue_id = str(uuid.uuid4().hex)
+                issue = State(id=issue_id, object_id=issue_id, country_id=str(country.object_id),
+                              name_mm_uni=str(state),
+                              name_mm_zawgyi=Rabbit.uni2zg(state))
+                db_session.add(issue)
                 db_session.commit()
+
+                for art in range(1, 31):
+                    print("Generating Days.......\n")
+                    article_id = str(uuid.uuid4().hex)
+                    article = Day(id=article_id, object_id=article_id,
+                                  country_id=str(country.object_id),
+                                  state_id=str(issue.object_id),
+                                  day=art, day_mm=str(get_mm_num(art)), sehri_time="4:3" + str(art) + " am",
+                                  sehri_time_desc="Sehri",
+                                  sehri_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါချည်ချိန်"),
+                                  sehri_time_desc_mm_uni="ဝါချည်ချိန်",
+                                  iftari_time="7:3" + str(art) + " pm",
+                                  dua_mm_uni=daily_dua(art)["dua_mm"],
+                                  dua_mm_zawgyi=Rabbit.uni2zg(daily_dua(art)["dua_mm"]),
+                                  dua_ar=daily_dua(art)["dua_ar"],
+                                  dua_en=daily_dua(art)["dua_en"],
+                                  iftari_time_desc="Iftari",
+                                  iftari_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါဖြေချိန်"),
+                                  iftari_time_desc_mm_uni="ဝါဖြေချိန်"
+                                  )
+                    db_session.add(article)
+                    db_session.commit()
