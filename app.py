@@ -22,8 +22,8 @@ load_dotenv(dotenv_path, verbose=True)
 
 app = Flask(__name__)
 
-app.config['BASIC_AUTH_USERNAME'] = os.environ['AUTH_USER_NAME']
-app.config['BASIC_AUTH_PASSWORD'] = os.environ['PASSWORD']
+app.config['BASIC_AUTH_USERNAME'] = os.environ['BASIC_AUTH_USER_NAME']
+app.config['BASIC_AUTH_PASSWORD'] = os.environ['BASIC_AUTH_PASSWORD']
 basic_auth = BasicAuth(app)
 
 if os.environ["ENV"] != 'production':
