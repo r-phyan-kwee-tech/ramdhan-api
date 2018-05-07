@@ -218,7 +218,7 @@ def gen_seeds():
         db_session.query(Day).delete(synchronize_session=False)
         if os.environ["ENV"] != 'production':
             for state in state_arr:
-                print("Generating State........\n\n")
+                print("Generating State.........\n\n")
                 issue_id = str(uuid.uuid4().hex)
                 issue = State(id=issue_id, object_id=issue_id, country_id=str(country.object_id),
                               name_mm_uni=str(state),
