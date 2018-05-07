@@ -121,8 +121,8 @@ class Day(Base):
         sehri_time_desc_mm_zawgyi = Column(String(30, collation="utf8mb4_myanmar_ci", convert_unicode=True))
         iftari_time_desc_mm_zawgyi = Column(String(30, collation="utf8mb4_myanmar_ci", convert_unicode=True))
         iftari_time_desc_mm_uni = Column(String(30, collation="utf8mb4_myanmar_ci", convert_unicode=True))
-        dua_mm_uni = Column(String(200, collation="utf8mb4_myanmar_ci", convert_unicode=True))
-        dua_mm_zawgyi = Column(String(200, collation="utf8mb4_myanmar_ci", convert_unicode=True))
+        dua_mm_uni = Column(String(3000, collation="utf8mb4_myanmar_ci", convert_unicode=True))
+        dua_mm_zawgyi = Column(String(3000, collation="utf8mb4_myanmar_ci", convert_unicode=True))
 
     else:
         day_mm = Column(String(10))
@@ -131,8 +131,8 @@ class Day(Base):
         iftari_time_desc_mm_zawgyi = Column(String(30))
         iftari_time_desc_mm_uni = Column(String(30))
 
-        dua_mm_uni = Column(String(200))
-        dua_mm_zawgyi = Column(String(200))
+        dua_mm_uni = Column(String(3000))
+        dua_mm_zawgyi = Column(String(3000))
 
     calendar_day = Column(String(30), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
     hijari_day = Column(String(30), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
@@ -140,7 +140,7 @@ class Day(Base):
     sehri_time_desc = Column(String(30))
     iftari_time_desc = Column(String(30))
 
-    dua_ar = Column(String(200, collation="utf8_general_ci", convert_unicode=True))
+    dua_ar = Column(String(1000, collation="utf8_general_ci", convert_unicode=True))
     dua_en = Column(String(200))
 
     sehri_time = Column(String(30), default=str("4:30 am"))
