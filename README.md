@@ -13,7 +13,7 @@ Create a database(Used SQLite) with the table structure mentioned in *struct.sql
 ```  
 database.py  
   
-# Replace 'sqlite:///ramdan.db' with your path to database  
+# Replace 'sqlite:///ramdan.db' with your path to database
   
 engine = create_engine('sqlite:///ramdan.db', convert_unicode=True)  
   
