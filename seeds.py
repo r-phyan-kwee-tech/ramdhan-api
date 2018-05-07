@@ -214,8 +214,7 @@ def gen_seeds():
         country = Country(id=country_id, object_id=country_id, name=str(s["name"]))
         db_session.add(country)
         db_session.commit()
-        db_session.query(State).delete(synchronize_session=False)
-        db_session.query(Day).delete(synchronize_session=False)
+
         if os.environ["ENV"] != 'production':
             for state in state_arr:
                 print("Generating State.........\n\n")
