@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 import os
 from dotenv import load_dotenv
-from flask_basicauth import BasicAuth
 from flask import Flask, jsonify
+from flask_basicauth import BasicAuth
 from flask_graphql import GraphQLView
 from os.path import join, dirname
 from werkzeug.routing import BaseConverter

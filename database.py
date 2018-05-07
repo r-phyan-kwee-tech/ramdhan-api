@@ -141,7 +141,7 @@ class Day(Base):
     iftari_time_desc = Column(String(30))
 
     dua_ar = Column(String(1000, collation="utf8_general_ci", convert_unicode=True))
-    dua_en = Column(String(200))
+    dua_en = Column(String(1000))
 
     sehri_time = Column(String(30), default=str("4:30 am"))
     iftari_time = Column(String(30), default=str("7:30 pm"))

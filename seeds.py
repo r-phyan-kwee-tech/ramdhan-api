@@ -236,7 +236,7 @@ def gen_seeds():
                                   sehri_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါချည်ချိန်"),
                                   sehri_time_desc_mm_uni="ဝါချည်ချိန်",
                                   iftari_time="7:3" + str(art) + " pm",
-                                  dua_mm_uni=Rabbit.uni2zg(daily_dua(art)["dua_mm"]),
+                                  dua_mm_uni=Rabbit.zg2uni(str(daily_dua(art)["dua_mm"])),
                                   dua_mm_zawgyi=daily_dua(art)["dua_mm"],
                                   dua_ar=daily_dua(art)["dua_ar"],
                                   dua_en=daily_dua(art)["dua_en"],

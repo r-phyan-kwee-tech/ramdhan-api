@@ -44,7 +44,7 @@ class SheetFetch(object):
                                   sehri_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါချည်ချိန်"),
                                   sehri_time_desc_mm_uni="ဝါချည်ချိန်",
                                   iftari_time=str(iftar_time + " pm"),
-                                  dua_mm_uni=seeds.daily_dua(i)["dua_mm"],
+                                  dua_mm_uni=Rabbit.zg2uni(seeds.daily_dua(i)["dua_mm"]),
                                   dua_mm_zawgyi=Rabbit.uni2zg(seeds.daily_dua(i)["dua_mm"]),
                                   dua_ar=seeds.daily_dua(i)["dua_ar"],
                                   dua_en=seeds.daily_dua(i)["dua_en"],
