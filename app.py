@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 from flask_basicauth import BasicAuth
 from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_graphql import GraphQLView
 from os.path import join, dirname
 from werkzeug.routing import BaseConverter
@@ -21,6 +22,7 @@ load_dotenv(dotenv_path)
 load_dotenv(dotenv_path, verbose=True)
 
 app = Flask(__name__)
+CORS(app)
 
 app.config['BASIC_AUTH_USERNAME'] = os.environ['BASIC_AUTH_USER_NAME']
 app.config['BASIC_AUTH_PASSWORD'] = os.environ['BASIC_AUTH_PASSWORD']
