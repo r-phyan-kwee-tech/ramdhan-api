@@ -1,10 +1,10 @@
 import calendar
 import datetime
+import os
+from os.path import join, dirname
 from time import strftime, gmtime
 
-import os
 from dotenv import load_dotenv
-from os.path import join, dirname
 from sqlalchemy import Column, Integer, Text, String, ForeignKey, BIGINT, VARCHAR, Boolean
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -140,7 +140,6 @@ class Day(Base):
 
     sehri_time_desc = Column(String(30))
     iftari_time_desc = Column(String(30))
-
 
     dua_en = Column(String(200))
 

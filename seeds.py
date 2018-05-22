@@ -214,11 +214,10 @@ def gen_seeds():
         country = Country(id=country_id, object_id=country_id, name=str(s["name"]))
         db_session.add(country)
         db_session.commit()
-        db_session.query(State).delete(synchronize_session=False)
-        db_session.query(Day).delete(synchronize_session=False)
+
         if os.environ["ENV"] != 'production':
             for state in state_arr:
-                print("Generating State........\n\n")
+                print("Generating State.........\n\n")
                 issue_id = str(uuid.uuid4().hex)
                 issue = State(id=issue_id, object_id=issue_id, country_id=str(country.object_id),
                               name_mm_uni=str(state),
@@ -237,7 +236,7 @@ def gen_seeds():
                                   sehri_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါချည်ချိန်"),
                                   sehri_time_desc_mm_uni="ဝါချည်ချိန်",
                                   iftari_time="7:3" + str(art) + " pm",
-                                  dua_mm_uni=Rabbit.zg2uni(daily_dua(art)["dua_mm"]),
+                                  dua_mm_uni=Rabbit.zg2uni(str(daily_dua(art)["dua_mm"])),
                                   dua_mm_zawgyi=daily_dua(art)["dua_mm"],
                                   dua_ar=daily_dua(art)["dua_ar"],
                                   dua_en=daily_dua(art)["dua_en"],
