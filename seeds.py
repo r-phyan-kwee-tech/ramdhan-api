@@ -197,7 +197,8 @@ def get_mm_num(num):
 
 def gen_seeds():
     import uuid
-    from database import db_session, Country, State, Day
+    from database import db_session
+    from manager import Country, State, Day
 
     source_arr = [{
         "base_url": "http://androidweekly.net/issues/",

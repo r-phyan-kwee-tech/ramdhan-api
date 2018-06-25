@@ -1,6 +1,6 @@
 import math
-
 from enum import Enum
+
 from pip._vendor import requests
 from pyquery import PyQuery as pq
 

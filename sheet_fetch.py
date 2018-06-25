@@ -4,7 +4,8 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
 import seeds
-from database import State, Day, db_session
+from database import db_session
+from manager import State, Day
 from rabbit import Rabbit
 
 
