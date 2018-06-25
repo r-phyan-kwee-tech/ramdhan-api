@@ -1,4 +1,4 @@
-web: python manage.py shell
+web: python app.py
 shell: python manage.py shell
 initdb: python manage.py db init
 migrate: python manage.py db migrate
