@@ -4,7 +4,7 @@ from graphene_sqlalchemy import SQLAlchemyObjectType
 from sqlalchemy import or_, desc, asc
 
 from database import db_session, gen_offset_from_page, generate_meta
-from manager import User as UserModel, Country as CountryModel, State as StateModel, Day as DayModel
+from manage import User as UserModel, Country as CountryModel, State as StateModel, Day as DayModel
 
 
 class Users(SQLAlchemyObjectType):

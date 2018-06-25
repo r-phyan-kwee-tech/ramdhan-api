@@ -5,7 +5,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 
 import seeds
 from database import db_session
-from manager import State, Day
+from manage import State, Day
 from rabbit import Rabbit
 
 
