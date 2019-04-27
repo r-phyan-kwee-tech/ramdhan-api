@@ -4,7 +4,8 @@ import uuid
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-from database import State, Day
+from database import db_session
+from manage import State, Day
 from rabbit import Rabbit
 
 
@@ -197,12 +198,19 @@ class TestGSheetFetch(unittest.TestCase):
         sh = gspread.authorize(credentials).open_by_key('1SjJG2RzITf8qAmYDU9RFnWVaMP9912y8KfbuJe8th-c')
         work_sheets = sh.worksheets()
 
-        assert len(work_sheets) == 14
+        # assert len(work_sheets) == 14
 
-        country_id = str(uuid.uuid4().hex)
-        for ws_count, worksheet in enumerate(sh.worksheets()):
+        country_id = 'bef77a2d0e5c4061b6df0e8c6875837a'
+        # 0-24
+        # 25-50
+        # 50-75
+        # 75-100
+        # 99-124
+        # 124-149
+        for ws_count, worksheet in enumerate(work_sheets[124:len(work_sheets)]):
             # TODO write State By Country Here
-            state_name = MockConfig().getStateName(worksheet.title)
+            state_name = worksheet.title
+            print(state_name)
             state_id = str(uuid.uuid4().hex)
             state = State(id=state_id, object_id=state_id, country_id=str(country_id), name_mm_uni=str(state_name),
                           name_mm_zawgyi=Rabbit.uni2zg(state_name))
@@ -210,6 +218,9 @@ class TestGSheetFetch(unittest.TestCase):
             hij_day_list = worksheet.col_values(2)
             sehri_time_list = worksheet.col_values(3)
             iftari_time_list = worksheet.col_values(4)
+
+            db_session.add(state)
+            db_session.commit()
 
             for i, (cal_day, hij_day, seh_time, iftar_time) in enumerate(
                     zip(cal_day_list, hij_day_list, sehri_time_list, iftari_time_list)):
@@ -230,3 +241,5 @@ class TestGSheetFetch(unittest.TestCase):
                                   iftari_time_desc="Iftari",
                                   iftari_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါဖြေချိန်"),
                                   iftari_time_desc_mm_uni="ဝါဖြေချိန်")
+                    db_session.add(article)
+                    db_session.commit()
