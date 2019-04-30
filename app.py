@@ -14,6 +14,7 @@ from werkzeug.routing import BaseConverter
 from werkzeug.utils import redirect
 
 from database import engine
+from seeds import gen_seeds
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
