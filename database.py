@@ -20,7 +20,7 @@ url = url.format(os.environ["DB_USER_NAME"], os.environ["DB_PASSWORD"], os.envir
 if os.environ["ENV"] != 'production':
     engine = create_engine('sqlite:///ramdan.db', convert_unicode=True)
 else:
-    engine = create_engine(url)
+    engine = create_engine('sqlite:///ramdan.db', convert_unicode=True)
 
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,

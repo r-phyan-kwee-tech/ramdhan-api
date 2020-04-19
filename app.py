@@ -14,6 +14,7 @@ from werkzeug.routing import BaseConverter
 from werkzeug.utils import redirect
 
 from database import engine
+from excel_fetch import ExcelFetch
 from seeds import gen_seeds
 
 db_session = scoped_session(sessionmaker(autocommit=False,
@@ -70,7 +71,7 @@ def index():
 @app.route('/fetch/<country_id>')
 @basic_auth.required
 def fetch(country_id):
-    status = SheetFetch().fetch(country_id)
+    status = ExcelFetch().fetch(country_id)
     return jsonify({"fetch_status": status})
 
 

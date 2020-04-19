@@ -103,8 +103,8 @@ class Day(db.Model):
 
     is_kadir = Column(Boolean, default=False)
 
-    country_id = Column(String(255), ForeignKey("country.object_id"))
-    state_id = Column(String(255), ForeignKey("state.object_id"))
+    country_id = Column(String(255), ForeignKey("country.object_id"),index=True)
+    state_id = Column(String(255), ForeignKey("state.object_id"),index=True)
     created_date = Column(BIGINT(), default=calendar.timegm(datetime.datetime.utcnow().utctimetuple()))
     # updated_date = Column(String(50), default=str(strftime("%a, %d %b %Y %X +0000", gmtime())))
     updated_date = Column(BIGINT(), default=calendar.timegm(datetime.datetime.utcnow().utctimetuple()))

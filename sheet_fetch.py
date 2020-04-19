@@ -20,7 +20,8 @@ class SheetFetch(object):
         for ws_count, worksheet in enumerate(sh.worksheets()):
             # TODO write State By Country Here
 
-            state_name = seeds.get_state_name(worksheet.title)
+            state_district = seeds.get_state_name(worksheet.title)
+            state_name="{0}/{1}".format(state_district[0],state_district[1])
             state_id = str(uuid.uuid4().hex)
             state = State(id=state_id, object_id=state_id, country_id=str(country_id), name_mm_uni=str(state_name),
                           name_mm_zawgyi=Rabbit.uni2zg(state_name))

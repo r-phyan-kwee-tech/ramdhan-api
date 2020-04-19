@@ -20,22 +20,30 @@ def mm_num(x):
 
 
 def get_state_name(x):
-    return {'YANGON Region': "ရန်ကုန်တိုင်း",
-            'NAY PYI DAW Region': "နေပြည်တော် (ပျဉ်းမနား)",
-            'MANDALAY Region': "မန္တလေးတိုင်း",
-            'KAYIN Region': "ကရင်ပြည်နယ်",
-            'MON Region': "မွန်ပြည်နယ်",
-            'KAYAR Region': "ကယားပြည်နယ်",
-            'KACHIN Region': "ကချင်ပြည်နယ်",
-            'SHAN Region': "ရှမ်းပြည်နယ်",
-            'RAKHINE Region': "ရခိုင်ပြည်နယ်",
-            'TANIN THARYE Region': "တင်္နသာရီတိုင်း",
-            'MA GWAY Region': "မကွေးတိုင်း",
-            'SAGAING Region': "စစ်ကိုင်းတိုင်း",
-            'IRRWADY Region': "ဧရာဝတီတိုင်း",
-            'BAGO Region': "ပဲခူးတိုင်း"
+    state_name = str(str(x).lower().split("|")[0]).strip()
+    district_name = str(str(x).lower().split("|")[1]).strip()
+    return ({'yangon': "ရန်ကုန်တိုင်း",
+             'nay_pyi_daw': "နေပြည်တော် (ပျဉ်းမနား)",
+             'mandalay': "မန္တလေးတိုင်း",
+             'kayin': "ကရင်ပြည်နယ်",
+             'mon': "မွန်ပြည်နယ်",
+             'kayah': "ကယားပြည်နယ်",
+             'kachin': "ကချင်ပြည်နယ်",
+             'chin': "ချင်းပြည်နယ်",
+             'shan_sw': "ရှမ်းပြည်နယ်(နောက်/တောင်)",
+             'shan_se': "ရှမ်းပြည်နယ်(ရှေ့/တောင်)",
+             'shan_n': "ရှမ်းပြည်နယ်(မြောက်)",
+             'rakkhine': "ရခိုင်ပြည်နယ်",
+             'tanin_tharyi': "တင်္နသာရီတိုင်း",
+             'magway': "မကွေးတိုင်း",
+             'sagaing': "စစ်ကိုင်းတိုင်း",
+             'irrwaddy': "ဧရာဝတီတိုင်း",
+             'irrwaddy_2': "ဧရာဝတီတိုင်း",
+             'bago_w': "ပဲခူးတိုင်း(နောက်)",
+             'bago_e2': "ပဲခူးတိုင်း(ရှေ့)",
+             'bago_e': "ပဲခူးတိုင်း(ရှေ့)"
 
-            }[x]
+             }[state_name], district_name)
 
 
 def daily_dua(x):
@@ -247,3 +255,7 @@ def gen_seeds():
                                   )
                     db_session.add(article)
                     db_session.commit()
+
+
+if __name__ == "__main__":
+    gen_seeds()
