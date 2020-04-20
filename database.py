@@ -12,9 +12,7 @@ load_dotenv(dotenv_path)
 # OR, the same with increased verbosity:
 load_dotenv(dotenv_path, verbose=True)
 
-url = os.environ["DB_URL_FORMAT"]
-url = url.format(os.environ["DB_USER_NAME"], os.environ["DB_PASSWORD"], os.environ["DB_HOST"], os.environ["DB_PORT"],
-                 os.environ["DB_NAME"])
+
 
 # Replace 'sqlite:///rfg.db' with your path to database
 if os.environ["ENV"] != 'production':

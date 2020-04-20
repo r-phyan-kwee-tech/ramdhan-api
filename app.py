@@ -36,8 +36,8 @@ alchemy_app = SQLAlchemy(app)
 
 CORS(app)
 
-app.config['BASIC_AUTH_USERNAME'] = os.environ['BASIC_AUTH_USER_NAME']
-app.config['BASIC_AUTH_PASSWORD'] = os.environ['BASIC_AUTH_PASSWORD']
+app.config['BASIC_AUTH_USERNAME'] = os.getenv('BASIC_AUTH_USER_NAME','DEMO')
+app.config['BASIC_AUTH_PASSWORD'] = os.getenv('BASIC_AUTH_PASSWORD','123456')
 basic_auth = BasicAuth(app)
 
 if os.environ["ENV"] != 'production':
