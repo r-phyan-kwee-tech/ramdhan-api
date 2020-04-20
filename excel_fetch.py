@@ -72,7 +72,7 @@ class ExcelFetch(object):
                                   day=i, day_mm=str(seeds.get_mm_num(i)), sehri_time=str(str(seh_time).strip() + " am"),
                                   sehri_time_desc="Sehri",
                                   calendar_day=str(date[i-1]),
-                                  hijari_day=str(round(hij_day)),
+                                  hijari_day=str(hij_day).strip(),
                                   sehri_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါချည်ချိန်"),
                                   sehri_time_desc_mm_uni="ဝါချည်ချိန်",
                                   iftari_time=str(str(iftar_time).strip() + " pm"),
