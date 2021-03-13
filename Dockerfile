@@ -1,4 +1,4 @@
-FROM python:3.6.4
+FROM python:3.7.9-stretch
 MAINTAINER winhtaikaung(winhtaikaung28@hotmail.com)
 
 RUN mkdir -p /usr/src/app/
