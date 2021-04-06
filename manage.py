@@ -27,12 +27,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class User(db.Model):
-    __tablename__ = 'user'
-    id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    email = Column(Text)
-    username = Column(String(255))
+
 
 
 class Country(db.Model):

@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   app:
     restart: always
@@ -7,5 +7,4 @@ services:
       - 5000:5000
     volumes:
       - .:/app
-    entrypoint: ["python", "app.py"]
-
+    entrypoint: ["python", "manage.py", "db", "migrate"]

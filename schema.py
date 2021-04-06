@@ -4,13 +4,9 @@ from graphene_sqlalchemy import SQLAlchemyObjectType
 from sqlalchemy import or_, desc, asc
 
 from database import db_session, gen_offset_from_page, generate_meta
-from manage import User as UserModel, Country as CountryModel, State as StateModel, Day as DayModel
+from manage import Country as CountryModel, State as StateModel, Day as DayModel
 
 
-class Users(SQLAlchemyObjectType):
-    class Meta:
-        model = UserModel
-        interfaces = (relay.Node,)
 
 
 class Country(SQLAlchemyObjectType):
@@ -54,45 +50,6 @@ class DayResult(graphene.ObjectType):
 
 
 # Used to Create New User
-class createUser(graphene.Mutation):
-    class Input:
-        name = graphene.String()
-        email = graphene.String()
-        username = graphene.String()
-
-    ok = graphene.Boolean()
-    user = graphene.Field(Users)
-
-    @classmethod
-    def mutate(cls, _, args, context, info):
-        user = UserModel(name=args.get('name'), email=args.get('email'), username=args.get('username'))
-        db_session.add(user)
-        db_session.commit()
-        ok = True
-        return createUser(user=user, ok=ok)
-
-
-# Used to Change Username with Email
-class changeUsername(graphene.Mutation):
-    class Input:
-        username = graphene.String()
-        email = graphene.String()
-
-    ok = graphene.Boolean()
-    user = graphene.Field(Users)
-
-    @classmethod
-    def mutate(cls, _, args, context, info):
-        query = Users.get_query(context)
-        email = args.get('email')
-        username = args.get('username')
-        user = query.filter(UserModel.email == email).first()
-        user.username = username
-        db_session.commit()
-        ok = True
-
-        return changeUsername(user=user, ok=ok)
-
 
 class Query(graphene.ObjectType):
     node = relay.Node.Field()
@@ -170,15 +127,10 @@ class Query(graphene.ObjectType):
     # find_user = graphene.Field(lambda: Users, username=graphene.String())
     # all_users = SQLAlchemyConnectionField(Users)
 
-    def resolve_find_user(self, args, context, info):
-        query = Users.get_query(context)
-        username = args.get('username')
-        return query.filter(UserModel.username == username).first()
+    
 
 
-class MyMutations(graphene.ObjectType):
-    create_user = createUser.Field()
-    change_username = changeUsername.Field()
+
 
 
 schema = graphene.Schema(query=Query, types=[Country, State, Day])
