@@ -27,12 +27,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
-class User(db.Model):
-    __tablename__ = 'user'
-    id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    email = Column(Text)
-    username = Column(String(255))
+
 
 
 class Country(db.Model):
@@ -102,6 +97,7 @@ class Day(db.Model):
     iftari_time = Column(String(30), default=str("7:30 pm"))
 
     is_kadir = Column(Boolean, default=False)
+    is_Eid = Column(Boolean, default=False)
 
     country_id = Column(String(255), ForeignKey("country.object_id"),index=True)
     state_id = Column(String(255), ForeignKey("state.object_id"),index=True)

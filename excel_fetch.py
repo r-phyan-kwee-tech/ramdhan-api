@@ -3,10 +3,10 @@ import gspread
 
 from os.path import join, dirname, abspath
 import xlrd
-
+import datetime
 import seeds
 from database import db_session
-from manage import State, Day
+from manage import State, Day,Country
 from rabbit import Rabbit
 
 date = ['2022/04/03', '2022/04/04', '2022/04/05', '2022/04/06', '2022/04/07', '2022/04/08', '2022/04/09', '2022/04/10', '2022/04/11', '2022/04/12', '2022/04/13', '2022/04/14', '2022/04/15', '2022/04/16', '2022/04/17',
@@ -21,6 +21,9 @@ class ExcelFetch(object):
         work_book = xlrd.open_workbook(fname)
 
         country_id = str(country_id)
+        country=Country(id=country_id,object_id=country_id,name="Myanmar")
+        db_session.add(country)
+        db_session.commit()
         for ws_count, worksheet in enumerate(work_book.sheet_names()):
             # TODO write State By Country Here
             if ws_count > 0:

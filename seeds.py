@@ -20,6 +20,7 @@ def mm_num(x):
 
 
 def get_state_name(x):
+    print(x)
     state_name = str(str(x).lower().split("|")[0]).strip()
     district_name = str(str(x).lower().split("|")[1]).strip()
     return ({'yangon': "ရန်ကုန်တိုင်း",
@@ -41,7 +42,6 @@ def get_state_name(x):
              'irrwaddy_2': "ဧရာဝတီတိုင်း",
              'ayeyarwaddy': "ဧရာဝတီတိုင်း",
              'bago_w': "ပဲခူးတိုင်း(နောက်)",
-             'bago_e2': "ပဲခူးတိုင်း(ရှေ့)",
              'bago_e': "ပဲခူးတိုင်း(ရှေ့)"
 
              }[state_name], district_name)
@@ -209,31 +209,51 @@ def gen_seeds():
     from database import db_session
     from manage import Country, State, Day
 
-    source_arr = [{
-        "base_url": "http://androidweekly.net/issues/",
-        "name": "Myanmar",
-        "tag": "android"
-    }]
     state_arr = ["ရန်ကုန်တိုင်း", "မန္တလေးတိုင်း", "ဧရာဝတီတိုင်း", "မကွေးတိုင်း", "စစ်ကိုင်းတိုင်း", "တင်္နသာရီတိုင်း",
                  "ပဲခူးတိုင်း", "ကချင်ပြည်နယ်", "ချင်းပြည်နယ်", "ရခိုင်ပြည်နယ်", "ရှမ်းပြည်နယ်", "ကယားပြည်နယ်",
                  "ကရင်ပြည်နယ်", "မွန်ပြည်နယ်"]
-    for s in source_arr:
-        print("Generating Country.......\n\n\n")
-        country_id = str(uuid.uuid4().hex)
+    # for s in source_arr:
+    print("Generating Country.......\n\n\n")
+    country_id = str(uuid.uuid4().hex)
 
-        country = Country(id=country_id, object_id=country_id,
-                          name=str(s["name"]))
-        db_session.add(country)
-        db_session.commit()
+    country = Country(id=country_id, object_id=country_id,
+                      name=str(s["name"]))
+    db_session.add(country)
+    db_session.commit()
 
-        if os.environ["ENV"] != 'production':
-            for state in state_arr:
-                print("Generating State.........\n\n")
-                issue_id = str(uuid.uuid4().hex)
-                issue = State(id=issue_id, object_id=issue_id, country_id=str(country.object_id),
-                              name_mm_uni=str(state),
-                              name_mm_zawgyi=Rabbit.uni2zg(state))
-                db_session.add(issue)
+    if os.environ["ENV"] != 'production':
+        for state in state_arr:
+            print("Generating State.........\n\n")
+            issue_id = str(uuid.uuid4().hex)
+            issue = State(id=issue_id, object_id=issue_id, country_id=str(country.object_id),
+                          name_mm_uni=str(state),
+                          name_mm_zawgyi=Rabbit.uni2zg(state))
+            db_session.add(issue)
+            db_session.commit()
+
+            for art in range(1, 31):
+                print("Generating Days.......\n")
+                article_id = str(uuid.uuid4().hex)
+                article = Day(id=article_id, object_id=article_id,
+                              country_id=str(country.object_id),
+                              state_id=str(issue.object_id),
+                              day=art, day_mm=str(get_mm_num(art)), sehri_time="4:3" + str(art) + " am",
+                              sehri_time_desc="Sehri",
+                              sehri_time_desc_mm_zawgyi=Rabbit.uni2zg(
+                                  "ဝါချည်ချိန်"),
+                              sehri_time_desc_mm_uni="ဝါချည်ချိန်",
+                              iftari_time="7:3" + str(art) + " pm",
+                              dua_mm_uni=Rabbit.zg2uni(
+                                  str(daily_dua(art)["dua_mm"])),
+                              dua_mm_zawgyi=daily_dua(art)["dua_mm"],
+                              dua_ar=daily_dua(art)["dua_ar"],
+                              dua_en=daily_dua(art)["dua_en"],
+                              iftari_time_desc="Iftari",
+                              iftari_time_desc_mm_zawgyi=Rabbit.uni2zg(
+                                  "ဝါဖြေချိန်"),
+                              iftari_time_desc_mm_uni="ဝါဖြေချိန်"
+                              )
+                db_session.add(article)
                 db_session.commit()
 
                 for art in range(1, 31):
