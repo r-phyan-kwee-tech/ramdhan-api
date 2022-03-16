@@ -23,22 +23,23 @@ def get_state_name(x):
     state_name = str(str(x).lower().split("|")[0]).strip()
     district_name = str(str(x).lower().split("|")[1]).strip()
     return ({'yangon': "ရန်ကုန်တိုင်း",
-             'nay_pyi_daw': "နေပြည်တော် (ပျဉ်းမနား)",
+             'naypyidaw': "နေပြည်တော် (ပျဉ်းမနား)",
              'mandalay': "မန္တလေးတိုင်း",
-             'kayin': "ကရင်ပြည်နယ်",
+             'karen': "ကရင်ပြည်နယ်",
              'mon': "မွန်ပြည်နယ်",
              'kayah': "ကယားပြည်နယ်",
              'kachin': "ကချင်ပြည်နယ်",
              'chin': "ချင်းပြည်နယ်",
-             'shan_sw': "ရှမ်းပြည်နယ်(နောက်/တောင်)",
-             'shan_se': "ရှမ်းပြည်နယ်(ရှေ့/တောင်)",
+             'shan_s_w': "ရှမ်းပြည်နယ်(နောက်/တောင်)",
+             'shan_s_e': "ရှမ်းပြည်နယ်(ရှေ့/တောင်)",
              'shan_n': "ရှမ်းပြည်နယ်(မြောက်)",
-             'rakkhine': "ရခိုင်ပြည်နယ်",
-             'tanin_tharyi': "တင်္နသာရီတိုင်း",
-             'magway': "မကွေးတိုင်း",
+             'rakhine': "ရခိုင်ပြည်နယ်",
+             'tanintharyi': "တင်္နသာရီတိုင်း",
+             'magwe': "မကွေးတိုင်း",
              'sagaing': "စစ်ကိုင်းတိုင်း",
              'irrwaddy': "ဧရာဝတီတိုင်း",
              'irrwaddy_2': "ဧရာဝတီတိုင်း",
+             'ayeyarwaddy': "ဧရာဝတီတိုင်း",
              'bago_w': "ပဲခူးတိုင်း(နောက်)",
              'bago_e2': "ပဲခူးတိုင်း(ရှေ့)",
              'bago_e': "ပဲခူးတိုင်း(ရှေ့)"
@@ -220,7 +221,8 @@ def gen_seeds():
         print("Generating Country.......\n\n\n")
         country_id = str(uuid.uuid4().hex)
 
-        country = Country(id=country_id, object_id=country_id, name=str(s["name"]))
+        country = Country(id=country_id, object_id=country_id,
+                          name=str(s["name"]))
         db_session.add(country)
         db_session.commit()
 
@@ -242,15 +244,18 @@ def gen_seeds():
                                   state_id=str(issue.object_id),
                                   day=art, day_mm=str(get_mm_num(art)), sehri_time="4:3" + str(art) + " am",
                                   sehri_time_desc="Sehri",
-                                  sehri_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါချည်ချိန်"),
+                                  sehri_time_desc_mm_zawgyi=Rabbit.uni2zg(
+                                      "ဝါချည်ချိန်"),
                                   sehri_time_desc_mm_uni="ဝါချည်ချိန်",
                                   iftari_time="7:3" + str(art) + " pm",
-                                  dua_mm_uni=Rabbit.zg2uni(str(daily_dua(art)["dua_mm"])),
+                                  dua_mm_uni=Rabbit.zg2uni(
+                                      str(daily_dua(art)["dua_mm"])),
                                   dua_mm_zawgyi=daily_dua(art)["dua_mm"],
                                   dua_ar=daily_dua(art)["dua_ar"],
                                   dua_en=daily_dua(art)["dua_en"],
                                   iftari_time_desc="Iftari",
-                                  iftari_time_desc_mm_zawgyi=Rabbit.uni2zg("ဝါဖြေချိန်"),
+                                  iftari_time_desc_mm_zawgyi=Rabbit.uni2zg(
+                                      "ဝါဖြေချိန်"),
                                   iftari_time_desc_mm_uni="ဝါဖြေချိန်"
                                   )
                     db_session.add(article)

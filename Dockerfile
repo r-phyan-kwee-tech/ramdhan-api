@@ -12,4 +12,4 @@ COPY run.sh /usr/src/app/
 EXPOSE 5000
 
 
-CMD sh  /usr/src/app/run.sh
+
