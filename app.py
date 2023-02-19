@@ -86,4 +86,4 @@ if __name__ == "__main__":
     # if exists is False:
     # model_base.metadata.create_all(engine)
     # gen_seeds()
-    app.run(host="0.0.0.0", port=int(os.environ["PORT"] or "80"))
+    app.run(host="0.0.0.0", port=int(os.environ["PORT"] or "5000"))
