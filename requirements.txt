@@ -21,7 +21,7 @@ httplib2==0.17.2
 idna==2.9
 iso8601==0.1.12
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 Mako==1.1.2
 MarkupSafe==1.1.1
 oauth2client==4.1.3
